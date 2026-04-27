@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRICE DataHub — Azim Said</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/case-study.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">AZIM SAID<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#about">About</a>
+      <a href="mailto:azimsaid212@gmail.com">Contact</a>
+    </div>
+  </nav>
+
+  <!-- CASE STUDY HERO -->
+  <header class="cs-hero">
+    <div class="cs-back">
+      <a href="../index.html#work">← Back to work</a>
+    </div>
+    <div class="cs-hero-meta">
+      <span class="tag">Full-Stack Dev</span>
+      <span class="tag">Systems Design</span>
+      <span class="tag">UX / UI</span>
+    </div>
+    <h1 class="cs-title">BRICE DataHub</h1>
+    <p class="cs-subtitle">
+      A purpose-built internal data platform for A*STAR's battery remanufacturing programme, designed to bring structure
+      and discoverability to fragmented research data.
+    </p>
+    <div class="cs-attrs">
+      <div class="cs-attr">
+        <div class="cs-attr-label">Role</div>
+        <div class="cs-attr-value">Developer</div>
+      </div>
+      <div class="cs-attr">
+        <div class="cs-attr-label">Timeline</div>
+        <div class="cs-attr-value">3 months · Jan 2025 - Mar 2026</div>
+      </div>
+      <div class="cs-attr">
+        <div class="cs-attr-label">Tools</div>
+        <div class="cs-attr-value">ABP Framework, ASP.NET Core, PostgreSQL</div>
+      </div>
+      <div class="cs-attr">
+        <div class="cs-attr-label">Status</div>
+        <div class="cs-attr-value">Concluded — handed to A*STAR ARTC</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO IMAGE -->
+  <div class="cs-cover">
+    <img src="../images/brice_home.png" alt="BRICE DataHub home screen" class="cs-cover-img">
+  </div>
+
+  <!-- CASE STUDY BODY -->
+  <main class="cs-body">
+
+    <!-- 01 OVERVIEW -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">01 — Overview</div>
+      <div class="cs-section-content">
+        <h2>What is this project?</h2>
+        <p>
+          The project aimed to build an internal data management platform for the BRICE programme at A*STAR — a
+          government-funded initiative developing end-to-end remanufacturing solutions for retired lithium-ion
+          batteries.
+        </p>
+        <p>
+          Researchers across the programme generate large volumes of experimental data — cycle tests, impedance
+          measurements, thermal characterisation. The DataHub is where all of that lives, organised and accessible.
+        </p>
+        <p>
+          Supported by A*STAR's Advanced Remanufacturing and Technology Centre (ARTC) and the Singapore Institute of
+          Manufacturing Technology (SIMTech).
+        </p>
+      </div>
+    </section>
+
+    <!-- 02 PROBLEM -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">02 — Problem</div>
+      <div class="cs-section-content">
+        <h2>What needed solving?</h2>
+        <p>
+          Research data was scattered with no unified platform. Experimental results lived in ad hoc locations without
+          consistent metadata, so searching by battery ID or experiment type simply wasn't possible.
+        </p>
+        <p>
+          On top of that, there was no access control — anyone could modify anything — no enforced metadata at upload
+          time, and no pathway to analytics tools like Power BI, which the programme needed for battery health
+          dashboarding.
+        </p>
+        <p>
+          Our goal was to build a platform where data was findable, governed, and analytics-ready without needing
+          schema changes every time a new experiment type was added.
+        </p>
+      </div>
+    </section>
+
+    <!-- 03 RESEARCH -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">03 — Research & Discovery</div>
+      <div class="cs-section-content">
+        <h2>What was found</h2>
+        <p>
+          We mapped the programme's data landscape — what experiment categories existed, what metadata each produced,
+          and who needed to do what with the data. We also looked at the FAIR principles (Findability, Accessibility,
+          Interoperability, Reusability) as a benchmark, which shaped most of the core data model decisions.
+        </p>
+
+        <div class="cs-findings">
+          <div class="cs-finding">
+            <div class="cs-finding-num">01</div>
+            <div>
+              <strong>Different subcategories need different metadata</strong>
+              <p>Cycle Tests, Thermal Tests, and Impedance Measurements each have distinct fields — a single fixed
+                schema would either over-constrain some experiments or under-capture others.</p>
+            </div>
+          </div>
+          <div class="cs-finding">
+            <div class="cs-finding-num">02</div>
+            <div>
+              <strong>Users have different access needs</strong>
+              <p>Researchers need to browse safely without risk of accidental modification. Admins need elevated
+                capabilities for curation. A flat permission model wouldn't work.</p>
+            </div>
+          </div>
+          <div class="cs-finding">
+            <div class="cs-finding-num">03</div>
+            <div>
+              <strong>Analytics was a dependency</strong>
+              <p>The programme's Power BI dashboarding goals couldn't be bolted on later — the data model and API
+                surface needed to be designed for queryability from the start.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WIREFRAMES -->
+    <div class="cs-img-grid cs-fade">
+      <img src="../images/brice_wireframe1.png" alt="Wireframe 1">
+      <img src="../images/brice_wireframe2.png" alt="Wireframe 2">
+    </div>
+    <p class="cs-img-caption cs-fade">UI Mockups from A*STAR showing upload and viewing records </p>
+
+    <!-- 04 IDEATION -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">04 — Ideation</div>
+      <div class="cs-section-content">
+        <h2>What ideas were explored?</h2>
+        <p>
+          The core tension was flexibility vs. structure. We explored a rigid per-subcategory table schema —
+          predictable, but it would require a migration every time the programme added a new experiment type. We ruled
+          that out early.
+        </p>
+        <p>
+          The other question was how far the platform should go into analytics. We considered building dashboarding in
+          directly, but decided to keep the DataHub focused on data management and expose clean API surfaces for Power
+          BI instead. It kept the scope manageable and the UI uncluttered.
+        </p>
+      </div>
+    </section>
+
+    <!-- IMAGE GRID (wireframes / explorations) -->
+    <!-- <div class="cs-img-grid cs-fade">
+      <div class="placeholder-img">
+        <div class="placeholder-text">Wireframe / sketch A</div>
+      </div>
+      <div class="placeholder-img">
+        <div class="placeholder-text">Wireframe / sketch B</div>
+      </div>
+      <div class="placeholder-img">
+        <div class="placeholder-text">Wireframe / sketch C</div>
+      </div>
+      <div class="placeholder-img">
+        <div class="placeholder-text">Wireframe / sketch D</div>
+      </div>
+    </div>
+    <p class="cs-img-caption cs-fade">Early explorations — I ended up going with direction B because…</p> -->
+
+    <!-- 05 DESIGN DECISIONS -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">05 — Design Decisions</div>
+      <div class="cs-section-content">
+        <h2>Why does it look and work this way?</h2>
+        <p>
+          Upload forms and search filters adapt dynamically based on the selected subcategory, showing only fields
+          relevant to that experiment type. This avoids a bloated one-size-fits-all form while keeping metadata
+          consistent.
+        </p>
+        <p>
+          I kept the Records page off the navbar entirely. It's only reachable by clicking a file in the Explore table,
+          scoped to that specific file via URL parameter. This prevents users from landing on an empty or orphaned
+          records view.
+        </p>
+      </div>
+    </section>
+
+    <!-- ANNOTATED SCREENSHOT -->
+    <div class="cs-img-annotated cs-fade">
+      <img src="../images/brice_search.png" alt="BRICE DataHub search page" class="cs-annotated-img">
+      <div class="cs-annotations">
+        <div class="cs-annotation">
+          <div class="cs-annotation-marker">A</div>
+          <div>
+            <strong>Dynamic subcategory metadata</strong>
+            <p>Selecting a subcategory updates the upload form and search filters to show only relevant fields.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANNOTATED SCREENSHOT -->
+    <div class="cs-img-annotated cs-fade">
+      <img src="../images/brice_explore.png" alt="BRICE DataHub explore page" class="cs-annotated-img">
+      <div class="cs-annotations">
+        <div class="cs-annotation">
+          <div class="cs-annotation-marker">A</div>
+          <div>
+            <strong>Role-aware action menu</strong>
+            <p>Download and Delete buttons within the Action dropdown are only visible to users with the appropriate permissions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 FINAL DESIGN -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">06 — Final Design</div>
+      <div class="cs-section-content">
+        <h2>What shipped?</h2>
+        <p>
+          A working platform across four surfaces: the Explore page with a filterable DataTable and multi-dimensional
+          search, a multi-file upload modal with drag-and-drop staging and enforced metadata, a scoped row-level Records
+          view, and a role-aware action menu surfacing Download and Delete only to permitted users.
+        </p>
+      </div>
+    </section>
+
+    <div class="cs-img-full cs-fade">
+      <img src="../images/brice_home.png" alt="BRICE DataHub main screen">
+    </div>
+
+    <div class="cs-img-grid cs-fade">
+      <img src="../images/brice_explore.png" alt="Explore page">
+      <img src="../images/brice_search.png" alt="Search page">
+      <img src="../images/brice_upload.png" alt="Upload modal">
+      <img src="../images/brice_records.png" alt="Records view">
+    </div>
+
+    <!-- 07 BUILD NOTES -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">07 — Build Notes</div>
+      <div class="cs-section-content">
+        <h2>How was it built?</h2>
+        <p>
+          Built on ABP Framework (ASP.NET Core, Razor Pages) with a PostgreSQL backend, structured across Application,
+          Domain, Infrastructure, and Web layers. CSV files are parsed row-by-row with CsvHelper and stored as JSON
+          DataRecords, enabling structured querying without a fixed schema per subcategory.
+        </p>
+        <div class="cs-stack">
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Framework</span>
+            <span>ABP Framework</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Database</span>
+            <span>PostgreSQL</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">CSV Parsing</span>
+            <span>CsvHelper</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Auth & Roles</span>
+            <span>ABP permission system</span>
+          </div>
+        </div>
+        <p>
+          Instead of defining separate database columns for every metadata field, domain attributes like Battery ID and
+          Battery Type are stored in ABP's ExtraProperties dictionary. New experiment types get onboarded without a
+          migration — something I pushed for early once I saw how often the programme's requirements were shifting.
+        </p>
+      </div>
+    </section>
+
+    <!-- 08 OUTCOME -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">08 — Outcome & Reflection</div>
+      <div class="cs-section-content">
+        <h2>What happened, and what was learned</h2>
+        <p>
+          The platform was handed to A*STAR with a functional foundation across all stack layers. Development was later
+          concluded as the broader project pivoted focus to the OCR module, but significant ground was covered — the
+          data model, ingestion pipeline, and permission system were all production-ready.
+          I had experience in full-stack development, but not in building domain-specific internal tools for a research
+          programme, so a lot of this was new territory — particularly the challenge of designing for evolving
+          requirements without accruing technical debt.
+        </p>
+        <div class="cs-retro">
+          <div class="cs-retro-col">
+            <div class="cs-retro-label">What worked</div>
+            <ul>
+              <li>ExtraProperties pattern kept the schema stable as metadata requirements kept shifting</li>
+              <li>Dynamic subcategory-driven forms reduced complexity without losing specificity</li>
+              <li>Designing the API surface for Power BI early meant no rework was needed later</li>
+            </ul>
+          </div>
+          <div class="cs-retro-col">
+            <div class="cs-retro-label">What I'd change</div>
+            <ul>
+              <li>Get the actual subcategory names from the programme team at the start — using placeholders created
+                friction during testing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- NEXT PROJECT -->
+  <!-- <div class="cs-next">
+    <div class="cs-next-label">Next project</div>
+    <a href="project-two.html" class="cs-next-link">
+      <span>Project Two Name</span>
+      <span class="cs-next-arrow">→</span>
+    </a>
+  </div> -->
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-left">
+      <span>Azim Said</span>
+      <span class="footer-dim">· Singapore</span>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:azimsaid212@gmail.com">Email</a>
+      <a href="https://github.com/azim-git" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/azimsaid-/" target="_blank">LinkedIn</a>
+    </div>
+    <div class="footer-dim footer-year">© 2026</div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+
+</html>
