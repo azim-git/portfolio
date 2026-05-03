@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyberbullying Classifier — Azim Said</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/case-study.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <a href="../index.html" class="nav-logo">AZIM SAID<span class="dot">.</span></a>
+        <div class="nav-links">
+            <a href="../index.html#work">Work</a>
+            <a href="../index.html#about">About</a>
+            <a href="mailto:azimsaid212@gmail.com">Contact</a>
+        </div>
+    </nav>
+
+    <!-- CASE STUDY HERO -->
+    <header class="cs-hero">
+        <div class="cs-back">
+            <a href="../index.html#work">← Back to work</a>
+        </div>
+        <div class="cs-hero-meta">
+            <span class="tag">NLP / ML</span>
+            <span class="tag">Full-Stack</span>
+        </div>
+        <h1 class="cs-title">Cyberbullying Classifier</h1>
+        <p class="cs-subtitle">
+            A fine-tuned DistilBERT model that classifies social media posts across three harm levels —
+            outputting calibrated confidence scores to power nuanced, educational interventions rather than blunt
+            content removal.
+        </p>
+        <div class="cs-attrs">
+            <div class="cs-attr">
+                <div class="cs-attr-label">Role</div>
+                <div class="cs-attr-value">ML Engineer & Developer</div>
+            </div>
+            <div class="cs-attr">
+                <div class="cs-attr-label">Timeline</div>
+                <div class="cs-attr-value">2026</div>
+            </div>
+            <div class="cs-attr">
+                <div class="cs-attr-label">Tools</div>
+                <div class="cs-attr-value">Python, DistilBERT, FastAPI, React, HuggingFace</div>
+            </div>
+            <div class="cs-attr">
+                <div class="cs-attr-label">Status</div>
+                <div class="cs-attr-value"><a href="https://huggingface.co/spaces/AA-Hugger/cybully-classifier"
+                        target="_blank" style="color: var(--accent);">Deployed ↗</a></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO IMAGE -->
+    <div class="cs-cover">
+        <img src="../images/cybully_main.png" alt="Cyberbullying Classifier UI" class="cs-cover-img">
+    </div>
+
+    <!-- CASE STUDY BODY -->
+    <main class="cs-body">
+
+        <!-- 01 OVERVIEW -->
+        <section class="cs-section cs-fade">
+            <div class="cs-section-label">01 — Overview</div>
+            <div class="cs-section-content">
+                <h2>What is this project?</h2>
+                <p>
+                    A fine-tuned transformer model that analyses social media comments and classifies them as
+                    <em>normal</em>, <em>offensive</em>, or <em>hate speech</em> — trained on the <a
+                        href="https://www.kaggle.com/datasets/sayankr007/cyber-bullying-data-for-multi-label-classification/data?select=hateXplain.csv"
+                        target="_blank" style="color: var(--accent);">HateXplain</a> dataset
+                    of 20,148 annotated social media posts. The model outputs a softmax confidence score
+                    for each class rather than a hard label, enabling graduated responses depending on how certain
+                    the model is.
+                </p>
+                <p>
+                    The end goal is educational intervention: flagging prejudiced content and helping users understand
+                    why it's harmful, not just removing it. The system is deployed as a FastAPI backend serving a
+                    React frontend, hosted on HuggingFace Spaces.
+                </p>
+                <p>
+                    This is Project 1 of a personal NLP portfolio, built to develop practical ML engineering skills
+                    end-to-end — from raw dataset through to a deployed, versioned model.
+                </p>
+            </div>
+        </section>
+
+        <!-- 02 PROBLEM -->
+        <section class="cs-section cs-fade">
+            <div class="cs-section-label">02 — Problem</div>
+            <div class="cs-section-content">
+                <h2>What needed solving?</h2>
+                <p>
+                    Most content moderation approaches treat hate speech detection as a binary problem — harmful or not.
+                    This misses the reality that harm exists on a spectrum. Offensive language and hate speech are
+                    meaningfully
+                    different: one is often rude but context-dependent, the other targets people based on identity.
+                    Treating them identically produces both false positives and false negatives, and makes educational
+                    feedback impossible.
+                </p>
+                <p>
+                    Beyond classification granularity, there's the confidence problem. A model that outputs a hard label
+                    with no uncertainty signal can't distinguish between a post it's 95% sure about and one it's 51%
+                    sure about.
+                    For something as consequential as content moderation, that gap matters.
+                </p>
+                <p>
+                    The goal was a model that classifies at three levels of harm and communicates its own uncertainty —
+                    so downstream logic can treat borderline cases differently from clear-cut ones.
+                </p>
+            </div>
+        </section>
+
+        <!-- 03 RESEARCH & DISCOVERY -->
+        <section class="cs-section cs-fade">
+            <div class="cs-section-label">03 — Research & Discovery</div>
+            <div class="cs-section-content">
+                <h2>What the data revealed</h2>
+                <p>
+                    The HateXplain dataset contained 60,444 rows of social media posts. Each post would have exactly 3
+                    rows as
+                    3 annotators would label it independently. This included labelling the post content as
+                    <em>normal</em>, <em>offensive</em>, or <em>hate speech</em>,
+                    along with the vulnerable group that was being targetted by that post, if any. Aggregating to a
+                    majority-voted clean dataset of 19,229 posts revealed several non-obvious patterns that shaped
+                    every subsequent modelling decision.
+                </p>
+
+                <div class="cs-findings">
+                    <div class="cs-finding">
+                        <div class="cs-finding-num">01</div>
+                        <div>
+                            <strong>51% annotator disagreement</strong>
+                            <p>
+                                Half of all posts had at least one annotator who disagreed with the majority. This can
+                                be inferreed to be a result of
+                                genuine human ambiguity about what constitutes harm, causing disagreement in the
+                                labelling. Any model trained
+                                on this data has a hard ceiling on accuracy, because even humans don't agree.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="cs-img-grid cs-fade">
+                        <img src="../images/cybully_label_distribution_raw.png" alt="Raw label distribution">
+                        <img src="../images/cybully_disagreement_breakdown.png" alt="Sources of annotator disagreement">
+                    </div>
+                    <p class="cs-img-caption cs-fade">Label distribution across 60,444 annotator votes (left) and
+                        breakdown of where disagreement falls (right) — normal vs offensive is the most common conflict
+                        boundary. Notably, there are 919 posts where all 3 annotators labelled differently.</p>
+                    <div class="cs-finding">
+                        <div class="cs-finding-num">02</div>
+                        <div>
+                            <strong>Privacy tokens are higher in normal posts</strong>
+                            <p>
+                                There exists tokens like <code>&lt;user&gt;</code> and <code>&lt;number&gt;</code> that
+                                were replaced to privatise the data.
+                                These appeared at 45% rate in normal posts vs. 21% in hate speech. Hate speech tends to
+                                be broadcast-style — general statements targeting
+                                groups — rather than directed at specific individuals. This shaped how special tokens
+                                were handled
+                                during tokenisation.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="cs-finding">
+                        <div class="cs-finding-num">03</div>
+                        <div>
+                            <strong><code>&lt;censored&gt;</code> is evenly distributed across all classes</strong>
+                            <p>
+                                Explicit language appears equally across normal, offensive, and hate speech posts. This
+                                confirmed that
+                                profanity alone is not a signal for harm. The model needed to learn semantic context,
+                                not simply labelling based on vocabulary used.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="cs-finding">
+                        <div class="cs-finding-num">04</div>
+                        <div>
+                            <strong>Max post length of 165 words, mean of 23</strong>
+                            <p>
+                                The distribution made <code>MAX_LENGTH=128</code> a safe truncation point with
+                                negligible information
+                                loss, and confirmed DistilBERT's 512-token limit was never going to be a constraint.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="cs-img-full cs-fade">
+                        <img src="../images/cybully_wordclouds.png" alt="Most frequent words by class">
+                    </div>
+                    <p class="cs-img-caption cs-fade">Most frequent words per class. <code>&lt;user&gt;</code> and
+                        <code>&lt;number&gt;</code> dominate normal posts; hate speech vocabulary is far more targeted
+                        and consistent.
+                    </p>
+
+                    <div class="cs-img-full cs-fade">
+                        <img src="../images/cybully_length_distribution.png" alt="Word count distribution by class">
+                    </div>
+                    <p class="cs-img-caption cs-fade">Word count distributions are similar across classes — median 19–22
+                        words. Hate speech skews slightly shorter, consistent with broadcast-style targeting rather than
+                        conversational posts.</p>
+
+                    <div class="cs-finding">
+                        <div class="cs-finding-num">05</div>
+                        <div>
+                            <strong>African and Women are the most targeted groups</strong>
+                            <p>The dataset's target group annotations reveal which communities bear the most hate speech
+                                — useful context for understanding where model errors are most consequential.</p>
+                        </div>
+                    </div>
+
+                    <div class="cs-img-full cs-fade">
+                        <img src="../images/cybully_target_groups.png" alt="Most frequently targeted groups">
+                    </div>
+                    <p class="cs-img-caption cs-fade">Target group distribution across hate speech posts. African and
+                        Women account for the two largest shares.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 IDEATION -->
+        <section class="cs-section cs-fade">
+            <div class="cs-section-label">04 — Ideation</div>
+            <div class="cs-section-content">
+                <h2>Key decisions explored</h2>
+                <p>
+                    Two decisions in particular had significant downstream consequences and required deliberate
+                    exploration
+                    before committing.
+                </p>
+                <p>
+                    <strong>Binary vs. three-class classification.</strong> Collapsing offensive and hate speech into a
+                    single
+                    "harmful" class would have simplified training and likely improved accuracy metrics. But it would
+                    have
+                    destroyed the product's core value — graduated intervention requires knowing which tier a post sits
+                    in.
+                    The three-class setup was kept.
+                </p>
+                <p><strong>Hard labels vs. confidence scores.</strong> Three output strategies were considered.</p>
+                <div class="cs-findings">
+                    <div class="cs-finding">
+                        <div class="cs-finding-num">A</div>
+                        <div>
+                            <strong>Hard label only</strong>
+                            <p>Simple, but gives no uncertainty signal.</p>
+                        </div>
+                    </div>
+                    <div class="cs-finding">
+                        <div class="cs-finding-num">B</div>
+                        <div>
+                            <strong>Hard label + confidence score</strong>
+                            <p>Better, but still loses information about how the other classes scored.</p>
+                        </div>
+                    </div>
+                    <div class="cs-finding">
+                        <div class="cs-finding-num">C</div>
+                        <div>
+                            <strong>Full softmax probabilities — chosen</strong>
+                            <p>The most information-rich output, enabling downstream logic to treat a 0.51 / 0.49 split
+                                very differently from a 0.97 / 0.02 split. Temperature scaling was planned post-training
+                                to recalibrate overconfident logits.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 DESIGN DECISIONS -->
+        <section class="cs-section cs-fade">
+            <div class="cs-section-label">05 — Modelling Decisions</div>
+            <div class="cs-section-content">
+                <h2>Why DistilBERT, and why these training choices?</h2>
+                <p>
+                    <strong>Model choice: DistilBERT.</strong> A full BERT model would have been slower to train and
+                    deploy
+                    without meaningfully better results on short social media text. DistilBERT retains ~97% of BERT's
+                    performance
+                    at 60% of its size — a more practical choice for a simple learning project where inference speed and
+                    HuggingFace Spaces resource limits are constraints.
+                </p>
+                <p>
+                    <strong>Class weights.</strong> The label distribution after majority voting was unbalanced: normal
+                    40.6%,
+                    hate speech 30.9%, offensive 28.5%. Without correction, the model would over-predict the majority
+                    class.
+                    Inverse-frequency class weights (normal: 0.820, offensive: 1.170, hate speech: 1.080) were applied
+                    to the
+                    loss function to counteract this.
+                </p>
+                <p>
+                    <strong>Training setup.</strong> AdamW optimiser with linear warmup and decay scheduling, gradient
+                    clipping
+                    at <code>max_norm=1.0</code>, and early stopping at patience=3. The best checkpoint was v2 at epoch
+                    2,
+                    learning rate 2e-5. Four model versions were trained and pushed to HuggingFace Hub, with the best
+                    selected by validation macro F1.
+                </p>
+                <p>
+                    <strong>Special token registration.</strong> The dataset contains 20 domain-specific tokens
+                    (<code>&lt;user&gt;</code>, <code>&lt;number&gt;</code>, <code>&lt;censored&gt;</code>, etc.)
+                    representing anonymised entities. These were registered with the tokenizer via
+                    <code>add_tokens()</code>
+                    so the model treats them as atomic units rather than splitting them into subwords.
+                </p>
+            </div>
+        </section>
+
+        <!-- 06 RESULTS -->
+        <section class="cs-section cs-fade">
+            <div class="cs-section-label">06 — Results</div>
+            <div class="cs-section-content">
+                <h2>What shipped and what the numbers mean</h2>
+                <p>
+                    The best model (v2 with class weights) achieved <strong>69.6% accuracy</strong> and a
+                    <strong>macro F1 of 0.69</strong> on the held-out test set. Per-class F1 scores:
+                    normal 0.73, hate speech 0.78, offensive 0.57.
+                </p>
+                <p>
+                    The offensive class underperforms which makes sense. Offensive posts sit in the middle of the
+                    harm spectrum and are the most contextually ambiguous. Hate speech, despite being the hardest to
+                    define conceptually, performs best because it contains more consistent linguistic patterns
+                    (group-targeted language, slurs).
+                </p>
+                <p>
+                    Critically, throughout multiple iterations, the 69.6% ceiling was never broken through. This was due
+                    to
+                    the inherent noise in the dataset. The 51% annotator disagreement means that even a perfect model
+                    that
+                    would still be wrong on cases where humans themselves disagree.
+                </p>
+
+                <div class="cs-img-full cs-fade">
+                    <img src="../images/cybully_confusion_matrix.png" alt="Confusion matrix (row-normalised)">
+                </div>
+                <p class="cs-img-caption cs-fade">Row-normalised confusion matrix. Offensive is the weakest class — 25%
+                    bleeds into normal, 14% into hate speech, reflecting its position as the ambiguous middle ground.
+                </p>
+            </div>
+        </section>
+
+        <!-- 07 AMBIGUOUS POSTS -->
+        <section class="cs-section cs-fade">
+            <div class="cs-section-label">07 — The Ambiguous Posts Finding</div>
+            <div class="cs-section-content">
+                <h2>The model mirrors human uncertainty</h2>
+                <p>
+                    Before training, the 919 posts where all three annotators disagreed were set aside as a separate
+                    <em>ambiguous_posts.csv</em>, excluded from training and reserved for post-hoc analysis.
+                    The question was whether the model would behave differently on posts that humans found genuinely
+                    unclear.
+                </p>
+                <p>
+                    It does. On the ambiguous set, mean confidence dropped to <strong>0.654</strong>, compared to higher
+                    confidence on the clean test set. <strong>13.4%</strong> of ambiguous posts fell below the 0.50
+                    confidence
+                    threshold entirely — the model essentially abstained. The predicted distribution skewed toward
+                    <em>offensive</em> (47.8%) rather than the extremes, which aligns with offensive being the most
+                    ambiguous middle category.
+                </p>
+                <p>
+                    This is the most important finding in the project. The model was mimicking the systematic uncertainty of human annotators. 
+                    We can make use of this in a content moderation system: low-confidence predictions can be
+                    routed to human review rather than automated action.
+                </p>
+                <div class="cs-img-full cs-fade">
+                    <img src="../images/cybully_ambiguous_analysis.png"
+                        alt="Confidence distribution and average class probability on ambiguous posts">
+                </div>
+                <p class="cs-img-caption cs-fade">Left: confidence distribution on ambiguous posts — a cluster sits just
+                    below the 0.5 threshold where the model essentially abstains. Right: mean softmax probability per
+                    class — offensive scores highest, consistent with it being the catch-all for uncertain cases.</p>
+            </div>
+        </section>
+
+        <!-- 08 BUILD NOTES -->
+        <section class="cs-section cs-fade">
+            <div class="cs-section-label">08 — Build Notes</div>
+            <div class="cs-section-content">
+                <h2>How it was built and deployed</h2>
+                <p>
+                    The ML pipeline is structured as a series of Python modules: <code>preprocess.py</code> handles
+                    text normalisation, tokenisation, and label encoding; <code>dataset.py</code> wraps the data into
+                    a PyTorch Dataset with a 70/15/15 stratified split; <code>train.py</code> handles the training loop
+                    with all scheduler and optimiser logic. Each module has a smoke test.
+                </p>
+                <p>
+                    Four model versions were pushed to HuggingFace Hub across training runs. At container startup,
+                    <code>download_models.py</code> fetches the best checkpoint from the Hub — so the Docker image
+                    stays lean and model updates don't require a rebuild.
+                </p>
+                <p>
+                    <code>AutoTokenizer</code> was used instead of <code>DistilBertTokenizer</code> directly,
+                    because the saved <code>tokenizer.json</code> format (including the registered special tokens)
+                    requires the auto-detection path to load correctly.
+                </p>
+                <div class="cs-stack">
+                    <div class="cs-stack-item">
+                        <span class="cs-stack-label">Model</span>
+                        <span>DistilBERT (distilbert-base-uncased)</span>
+                    </div>
+                    <div class="cs-stack-item">
+                        <span class="cs-stack-label">Backend</span>
+                        <span>FastAPI</span>
+                    </div>
+                    <div class="cs-stack-item">
+                        <span class="cs-stack-label">Frontend</span>
+                        <span>React (Vite)</span>
+                    </div>
+                    <div class="cs-stack-item">
+                        <span class="cs-stack-label">Model Registry</span>
+                        <span>HuggingFace Hub</span>
+                    </div>
+                    <div class="cs-stack-item">
+                        <span class="cs-stack-label">Deployed on</span>
+                        <span>HuggingFace Spaces (Docker)</span>
+                    </div>
+                    <div class="cs-stack-item">
+                        <span class="cs-stack-label">Dataset</span>
+                        <span>HateXplain (20,148 posts)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 09 OUTCOME -->
+        <section class="cs-section cs-fade">
+            <div class="cs-section-label">09 — Outcome & Reflection</div>
+            <div class="cs-section-content">
+                <h2>What happened, and what was learned</h2>
+                <p>
+                    The project is deployed end-to-end: a fine-tuned transformer accessible via a live web interface,
+                    with versioned model artefacts on HuggingFace Hub. As a first NLP project, the goal was to build
+                    the full pipeline from scratch rather than call an API — and every layer of it, from dataset
+                    wrangling
+                    to Docker deployment, was done from first principles.
+                </p>
+                <div class="cs-retro">
+                    <div class="cs-retro-col">
+                        <div class="cs-retro-label">What worked</div>
+                        <ul>
+                            <li>Separating ambiguous posts before training — the post-hoc analysis was the most
+                                interesting finding in the whole project</li>
+                            <li>Three-class softmax output over hard labels — the confidence signal is genuinely useful
+                                and would enable smarter downstream logic</li>
+                            <li>Class weights counteracted the label imbalance without requiring resampling or data
+                                augmentation</li>
+                            <li>Modular pipeline structure made iterating on training hyperparameters fast</li>
+                        </ul>
+                    </div>
+                    <div class="cs-retro-col">
+                        <div class="cs-retro-label">What I'd explore next</div>
+                        <ul>
+                            <li>Temperature scaling to properly calibrate confidence scores</li>
+                            <li>Rationale extraction: HateXplain includes word-level human rationales that could be used
+                                to train explainability on top of classification</li>
+                            <li>The offensive class F1 of 0.57 has the most room to improve — targeted data augmentation
+                                or a two-stage classifier might help</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- NEXT PROJECT -->
+    <div class="cs-next">
+        <div class="cs-next-label">Next project</div>
+        <a href="project_churp.html" class="cs-next-link">
+            <span>Churp</span>
+            <span class="cs-next-arrow">→</span>
+        </a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-left">
+            <span>Azim Said</span>
+            <span class="footer-dim">· Singapore</span>
+        </div>
+        <div class="footer-links">
+            <a href="mailto:azimsaid212@gmail.com">Email</a>
+            <a href="https://github.com/azim-git" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/azimsaid-/" target="_blank">LinkedIn</a>
+        </div>
+        <div class="footer-dim footer-year">© 2026</div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
