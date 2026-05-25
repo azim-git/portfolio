@@ -143,7 +143,8 @@
         <div class="project-info">
           <h2 class="project-title">Cyberbullying Classifier</h2>
           <p class="project-problem">
-            <strong>Problem:</strong> Content moderation tools treat harm as binary. <em>Is it harmful or is it safe?</em>
+            <strong>Problem:</strong> Content moderation tools treat harm as binary. <em>Is it harmful or is it
+              safe?</em>
             This misses the spectrum between offensive language and targeted hate speech, and gives
             users no signal about <em>why</em> content is flagged.
           </p>
@@ -162,13 +163,61 @@
           </p>
           <div class="project-links">
             <a href="work/project_cybully.html" class="link-btn">View Case Study →</a>
-            <a href="https://huggingface.co/spaces/AA-Hugger/cybully-classifier" class="link-btn link-ghost">Live Site ↗</a>
+            <a href="https://huggingface.co/spaces/AA-Hugger/cybully-classifier" class="link-btn link-ghost">Live Site
+              ↗</a>
             <a href="https://github.com/azim-git/Cybully/tree/master" class="link-btn link-ghost">GitHub ↗</a>
           </div>
         </div>
       </div>
       </div>
     </article>
+
+    <!-- Project N — CramRAG -->
+    <article class="project" data-index="04">
+      <div class="project-meta">
+        <span class="project-number">04</span>
+        <div class="project-tags">
+          <span class="tag">NLP / ML</span>
+          <span class="tag">RAG</span>
+          <span class="tag">Full-Stack</span>
+        </div>
+      </div>
+      <div class="project-content">
+        <div class="project-image">
+          <img src="images/cramrag_home.png" alt="CramRAG home screen" />
+        </div>
+        <div class="project-info">
+          <h2 class="project-title">CramRAG</h2>
+          <p class="project-problem">
+            <strong>Problem:</strong> Generic AI study tools have a faithfulness problem — LLMs fill
+            gaps in lecture slides with world knowledge, producing explanations that sound plausible
+            but contradict the source material students are being assessed on. Existing tools also
+            only generate flat fact-recall questions, ignoring synthesis and multi-answer formats.
+          </p>
+          <p class="project-process">
+            <strong>Process:</strong> Built a full RAG pipeline from scratch: ChromaDB vector store,
+            BM25 + cross-encoder reranking, query decomposition, and HyDE. A formal retrieval
+            evaluation harness (50 ground-truth pairs, Hit@K / MRR@K) diagnosed chunk boundary as
+            the dominant failure mode — doubling overlap from 240 to 480 characters improved Hit@5
+            by 26.6pp, larger than all algorithmic improvements combined. End-to-end quality was
+            measured with a 30-pair RAGAS harness (Faithfulness 0.88, Answer Relevancy 0.90).
+          </p>
+          <p class="project-outcome">
+            <strong>Outcome:</strong> A deployed study app with four question types, a split-pane
+            study chat with inline PDF highlighting of cited passages, persistent sessions and quiz
+            history, and a two-stage Docker build that switches LLM and embedding model between local
+            and prod via environment variables. Deployed on HuggingFace Spaces.
+          </p>
+          <div class="project-links">
+            <a href="work/project_cramrag.html" class="link-btn">View Case Study →</a>
+            <a href="https://huggingface.co/spaces/AA-Hugger/CramRAG" class="link-btn link-ghost" target="_blank">Live
+              Site ↗</a>
+            <a href="https://github.com/azim-git/CramRAG" class="link-btn link-ghost" target="_blank">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
 
   </section>
 

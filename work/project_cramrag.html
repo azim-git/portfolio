@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CramRAG — Azim Said</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/case-study.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">AZIM SAID<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#about">About</a>
+      <a href="mailto:azimsaid212@gmail.com">Contact</a>
+    </div>
+  </nav>
+
+  <!-- CASE STUDY HERO -->
+  <header class="cs-hero">
+    <div class="cs-back">
+      <a href="../index.html#work">← Back to work</a>
+    </div>
+    <div class="cs-hero-meta">
+      <span class="tag">NLP / ML</span>
+      <span class="tag">RAG</span>
+      <span class="tag">Full-Stack</span>
+    </div>
+    <h1 class="cs-title">CramRAG</h1>
+    <p class="cs-subtitle">
+      A RAG-powered study tool that turns uploaded documents into graded quizzes and a
+      citation-aware study chat — built end-to-end with a custom retrieval pipeline,
+      evaluated with a formal RAGAS harness, and deployed on HuggingFace Spaces.
+    </p>
+    <div class="cs-attrs">
+      <div class="cs-attr">
+        <div class="cs-attr-label">Role</div>
+        <div class="cs-attr-value">ML Engineer & Developer</div>
+      </div>
+      <div class="cs-attr">
+        <div class="cs-attr-label">Timeline</div>
+        <div class="cs-attr-value">2026</div>
+      </div>
+      <div class="cs-attr">
+        <div class="cs-attr-label">Tools</div>
+        <div class="cs-attr-value">Python, FastAPI, React, ChromaDB, LangChain, Groq, HuggingFace</div>
+      </div>
+      <div class="cs-attr">
+        <div class="cs-attr-label">Status</div>
+        <div class="cs-attr-value"><a href="https://huggingface.co/spaces/AA-Hugger/CramRAG"
+            target="_blank" style="color: var(--accent);">Deployed ↗</a></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO IMAGE -->
+  <div class="cs-cover">
+    <img src="../images/cramrag_home.png" alt="CramRAG home screen" class="cs-cover-img">
+  </div>
+
+  <!-- CASE STUDY BODY -->
+  <main class="cs-body">
+
+    <!-- 01 OVERVIEW -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">01 — Overview</div>
+      <div class="cs-section-content">
+        <h2>What is this project?</h2>
+        <p>
+          CramRAG lets students upload their own lecture notes and PDFs, then immediately put
+          them to use — either by generating a graded MCQ quiz drawn from the document content,
+          or by opening a study chat that can answer questions and cite the exact pages it drew
+          from. Everything is source-grounded: no fabricated answers, no explanations pulled
+          from outside the uploaded material.
+        </p>
+        <p>
+          The quiz side supports four question types (single-chunk, multi-chunk, document-wide,
+          and multi-select), configurable per session. The study chat renders the PDF inline and
+          highlights the cited passages directly on the page. Sessions and test sets persist
+          across visits so students can retake quizzes or resume study conversations.
+        </p>
+        <p>
+          This is Project 2 of a personal NLP portfolio. The focus was on building a complete,
+          production-grade RAG system from scratch — including a custom retrieval pipeline,
+          a formal retrieval evaluation harness, and a RAGAS-based end-to-end eval.
+        </p>
+      </div>
+    </section>
+
+    <!-- 02 PROBLEM -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">02 — Problem</div>
+      <div class="cs-section-content">
+        <h2>What needed solving?</h2>
+        <p>
+          Generic AI study tools have a faithfulness problem. An LLM asked to explain a topic
+          from a lecture slide will often fill gaps with its world knowledge — producing
+          explanations that sound plausible but contradict the source material the student
+          is actually being tested on.
+        </p>
+        <p>
+          Beyond faithfulness, there's the question framing problem. A tool that only generates
+          single-fact recall questions doesn't reflect how exams actually work. Real assessments
+          require synthesis across sections, high-level theme recognition, and the ability to
+          identify multiple correct answers simultaneously.
+        </p>
+        <p>
+          The goal was a system that stays grounded in uploaded source material at every step —
+          question generation, answer grading, and conversational responses — while supporting
+          the full range of question types students actually encounter.
+        </p>
+      </div>
+    </section>
+
+    <!-- 03 RESEARCH & DISCOVERY -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">03 — Research & Discovery</div>
+      <div class="cs-section-content">
+        <h2>What the retrieval eval revealed</h2>
+        <p>
+          Before optimising anything, a ground-truth retrieval evaluation harness was built:
+          50 hand-labelled query/chunk pairs (30 single-topic, 20 multi-topic) scored with
+          Hit@K, MRR@K, and Precision@K. A companion <code>diagnose_failures.py</code> script
+          ran direct distance checks and nearest-neighbour boundary analysis on every miss.
+        </p>
+
+        <div class="cs-findings">
+          <div class="cs-finding">
+            <div class="cs-finding-num">01</div>
+            <div>
+              <strong>Chunk boundary was the dominant failure mode</strong>
+              <p>43.8% of retrieval misses occurred because relevant content was split across chunk
+              boundaries. The embedding model wasn't the problem — the chunking strategy was.</p>
+            </div>
+          </div>
+          <div class="cs-finding">
+            <div class="cs-finding-num">02</div>
+            <div>
+              <strong>Overlap mattered more than any reranking technique</strong>
+              <p>Doubling chunk overlap from 240 to 480 characters improved Hit@5 by 26.6 percentage points —
+              larger than RRF (+3.3pp) and distance threshold tuning (+6.7pp) combined.</p>
+            </div>
+          </div>
+          <div class="cs-finding">
+            <div class="cs-finding-num">03</div>
+            <div>
+              <strong>Cross-encoder reranking improved MRR most</strong>
+              <p>ms-marco-MiniLM-L-6-v2 as a cross-encoder reranker pushed MRR@5 to 0.767 — meaningful
+              for a study tool where the top-ranked chunk sets the answer's framing.</p>
+            </div>
+          </div>
+          <div class="cs-finding">
+            <div class="cs-finding-num">04</div>
+            <div>
+              <strong>HyDE helps narrow queries, hurts broad ones</strong>
+              <p>Generating a hypothetical answer before retrieval (HyDE) improved precision on
+              single-concept queries but introduced noise on multi-part questions, so it was made
+              opt-in via an environment variable.</p>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top: 32px;">
+          The final retrieval configuration — chunk size 1200, overlap 480, distance threshold 0.65,
+          RRF fusion, cross-encoder reranking — produced a Hit@5 of <strong>0.800</strong> and
+          MRR@5 of <strong>0.767</strong> against the ground-truth set.
+        </p>
+      </div>
+    </section>
+
+    <!-- FULL WIDTH IMAGE -->
+    <div class="cs-img-full cs-fade">
+      <img src="../images/cramrag_configurequiz.png" alt="CramRAG quiz configuration screen">
+    </div>
+    <p class="cs-img-caption cs-fade">Quiz configuration — users select which documents to draw from (with chunk count shown),
+      set question counts per type, and see the mix validate in real time before generating.</p>
+
+    <!-- 04 IDEATION -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">04 — Ideation</div>
+      <div class="cs-section-content">
+        <h2>Key architectural decisions</h2>
+        <p>
+          Two decisions in particular had significant downstream consequences and required
+          deliberate resolution before committing.
+        </p>
+        <p>
+          <strong>Source attachment at generation time, not grading time.</strong> The obvious
+          approach is to retrieve source chunks at grading time — look up the relevant passage
+          when the answer needs verifying. The problem is source drift: a second retrieval call
+          may return different chunks than the ones the question was generated from, producing
+          explanations that don't match the question's intent. Instead, source chunks are attached
+          to each question at generation and travel with it through to the results page. One
+          retrieval call per question, no drift.
+        </p>
+        <p>
+          <strong>No escape hatches.</strong> During development, every fallback that would have
+          allowed the system to quietly degrade — an alternative embedding model, an alternative
+          PDF parser, a secondary retrieval path — was deliberately removed. The architecture
+          either works or fails visibly. This forces the retrieval pipeline to earn its keep
+          rather than mask failures with fallbacks.
+        </p>
+        <p>
+          <strong>Scanned PDF limitation surfaced explicitly.</strong> Rather than silently
+          returning poor results on scanned documents, the upload pipeline detects and returns
+          a clear warning. OCR is out of scope; the constraint is owned, not hidden.
+        </p>
+      </div>
+    </section>
+
+    <!-- 05 DESIGN DECISIONS -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">05 — Design Decisions</div>
+      <div class="cs-section-content">
+        <h2>Why it looks and works this way</h2>
+        <p>
+          The visual language — DM Mono, Playfair Display, grid-paper background, ink-weight borders
+          — was chosen to feel like a deliberate study environment rather than a generic AI tool.
+          The aesthetic signals permanence and seriousness: this is where you come to work, not to
+          be entertained.
+        </p>
+        <p>
+          <strong>Sliders validate but never auto-correct.</strong> The question type mix sliders
+          show a running total (displayed as <code>2+2+1+0=5</code>) and flag mismatches, but
+          never silently redistribute counts. Auto-correcting UI removes the user's sense of
+          agency over the quiz they're configuring.
+        </p>
+        <p>
+          <strong>Source material is collapsible per question, not truncated.</strong> In the results
+          view, each question card has a collapsible source section showing the raw chunks used to
+          generate it. Students who want to verify an explanation can — but it doesn't dominate
+          the review flow for those who don't.
+        </p>
+        <p>
+          <strong>Study mode co-locates document and chat.</strong> The split-pane layout keeps the
+          PDF viewer and the chat window side by side. When the model cites a passage, clicking the
+          citation pill scrolls the PDF to that page and briefly highlights the bounding box. The
+          student never has to switch contexts to verify a claim.
+        </p>
+      </div>
+    </section>
+
+    <!-- IMAGE GRID (quiz flow) -->
+    <div class="cs-img-grid cs-fade">
+      <img src="../images/cramrag_configurequiz2.png" alt="Question type selection">
+      <img src="../images/cramrag_quiz.png" alt="Quiz question view">
+      <img src="../images/cramrag_quizresult.png" alt="Quiz results overview">
+      <img src="../images/cramrag_quizresult2.png" alt="Quiz explanation and source material">
+    </div>
+
+    <!-- IMAGE GRID (study mode) -->
+    <div class="cs-img-grid cs-fade">
+      <img src="../images/cramrag_studymode.png" alt="Study mode split pane">
+      <img src="../images/cramrag_studycitation.png" alt="Study mode with highlighted citation">
+    </div>
+
+    <!-- 06 FINAL DESIGN -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">06 — Final Design</div>
+      <div class="cs-section-content">
+        <h2>What shipped</h2>
+        <p>
+          The full application shipped with two primary modes and a persistent document library.
+        </p>
+        <p>
+          <strong>Quiz mode</strong> covers the full generation and review flow: document selection,
+          question type configuration, a shuffled quiz with keyboard shortcuts, and a results page
+          with per-question explanations, source citations, and raw chunk access. Four question types
+          are supported — single-chunk (fact recall), multi-chunk (synthesis), document-wide
+          (themes), and multi-select (select all correct). Previous attempts are stored and
+          accessible from the library.
+        </p>
+        <p>
+          <strong>Study mode</strong> opens a persistent chat session scoped to up to three documents.
+          The LLM retrieves relevant chunks, streams a response with inline citation pills, and the
+          PDF viewer scrolls to the cited page on click with a canvas-overlay highlight. Sessions
+          resume from where they left off. Deleted documents are silently dropped from existing sessions.
+        </p>
+        <p>
+          <strong>Document Library</strong> is the home screen: a bookshelf of uploaded documents,
+          grouped quiz history with score badges, and direct access to any previous test set including
+          its question list and attempt history.
+        </p>
+      </div>
+    </section>
+
+    <div class="cs-img-full cs-fade">
+      <img src="../images/cramrag_homequizzes.png" alt="CramRAG home with quiz history">
+    </div>
+    <p class="cs-img-caption cs-fade">Home screen — document library left, grouped quiz history right. Score badges colour-code
+      by performance. Expanding a group shows individual attempts with VIEW and RETAKE actions.</p>
+
+    <div class="cs-img-grid cs-fade">
+      <img src="../images/cramrag_homedocselect.png" alt="Document selection for study or quiz">
+      <img src="../images/cramrag_viewtestset.png" alt="Test set detail page">
+      <img src="../images/cramrag_studysessions.png" alt="Study sessions history page">
+      <img src="../images/cramrag_upload.png" alt="Upload screen">
+    </div>
+
+    <!-- 07 EVALUATION -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">07 — Evaluation</div>
+      <div class="cs-section-content">
+        <h2>How the system was measured</h2>
+        <p>
+          Two separate evaluation harnesses were built — one for retrieval, one for end-to-end
+          RAG quality.
+        </p>
+        <p>
+          <strong>Retrieval eval</strong> used 50 hand-labelled query/chunk pairs scored with
+          Hit@K, MRR@K, and Precision@K. A diagnostic script checked direct embedding distances
+          and nearest-neighbour boundaries for every miss, enabling systematic failure mode
+          classification rather than guesswork. The iterative improvement arc:
+        </p>
+        <div class="cs-stack" style="margin-top: 16px;">
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Baseline Hit@5</span>
+            <span>0.467</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">+ RRF fusion</span>
+            <span>0.500 (+3.3pp)</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">+ Overlap 240 → 480</span>
+            <span>0.733 (+26.6pp)</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">+ Distance threshold 0.55 → 0.65</span>
+            <span>0.800 (+6.7pp)</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Cross-encoder MRR@5</span>
+            <span>0.767</span>
+          </div>
+        </div>
+        <p style="margin-top: 28px;">
+          <strong>RAGAS eval</strong> used 30 hand-written QA pairs across three academic documents
+          (IT Ethics, ML, Databases), scored manually by an LLM judge against Context Precision,
+          Context Recall, Faithfulness, and Answer Relevancy.
+        </p>
+        <div class="cs-stack" style="margin-top: 16px;">
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Context Precision</span>
+            <span>0.73</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Context Recall</span>
+            <span>0.90</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Faithfulness</span>
+            <span>0.88</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Answer Relevancy</span>
+            <span>0.90</span>
+          </div>
+        </div>
+        <p style="margin-top: 28px;">
+          The context precision gap (0.73 vs 0.90 recall) is consistent with terse lecture slides —
+          the retriever casts a wide net and captures most relevant content, but includes some
+          adjacent chunks that don't directly contribute to the answer. This is a known property
+          of the source material, not a retrieval failure.
+        </p>
+      </div>
+    </section>
+
+    <!-- 08 BUILD NOTES -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">08 — Build Notes</div>
+      <div class="cs-section-content">
+        <h2>How it was built and deployed</h2>
+        <p>
+          The backend is a fully async FastAPI application. SQLite (via <code>aiosqlite</code>)
+          handles persistence for documents, chunks, test sets, questions, attempts, and study
+          sessions. ChromaDB runs as a <code>PersistentClient</code> with a <code>DATA_DIR</code>
+          environment variable that switches between local (<code>./data</code>) and Docker
+          (<code>/data</code>) paths transparently.
+        </p>
+        <p>
+          Retrieval is handled by a pipeline that pools 8 candidates, applies a distance filter,
+          runs BM25 reranking, then cross-encoder reranking if enabled. Query decomposition
+          breaks complex questions into sub-queries before retrieval; HyDE generates a hypothetical
+          answer to embed as the query instead of the raw question when enabled. Both are
+          environment-gated so prod behaviour can differ from local without code changes.
+        </p>
+        <p>
+          PDF highlighting at study citation time is backed by PyMuPDF word-level bounding boxes
+          extracted at ingest — an 8-word anchor with progressive fallback and empty token
+          filtering. Bounding boxes are stored as JSON in ChromaDB and delivered to the frontend
+          via SSE alongside the streamed response. A canvas overlay per page handles hover
+          preview and click-lock behaviour.
+        </p>
+        <p>
+          The deployment is a two-stage Docker build: Node builds the React app, Python installs
+          the backend. FastAPI serves the React static build from the same container — one port,
+          no CORS concerns. The production LLM switches from local Ollama (Qwen3-8B) to Groq
+          (Llama 3.3 70B) via a single environment variable. The embedding model switches from
+          Qwen3-Embedding (Ollama) to BGE-small-en-v1.5 running in-process for CPU compatibility
+          on the HuggingFace Spaces free tier.
+        </p>
+        <div class="cs-stack">
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">LLM (local)</span>
+            <span>Qwen3-8B via Ollama</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">LLM (prod)</span>
+            <span>Llama 3.3 70B via Groq</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Embeddings (prod)</span>
+            <span>BGE-small-en-v1.5 (in-process)</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Vector Store</span>
+            <span>ChromaDB (PersistentClient)</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Chunking</span>
+            <span>LangChain RecursiveCharacterTextSplitter — 1200 chars, 480 overlap</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Reranking</span>
+            <span>BM25 + ms-marco-MiniLM-L-6-v2 cross-encoder</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">PDF parsing</span>
+            <span>PyMuPDF only (no fallback)</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Backend</span>
+            <span>FastAPI (async), SQLite / aiosqlite</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Frontend</span>
+            <span>React (Vite), react-pdf</span>
+          </div>
+          <div class="cs-stack-item">
+            <span class="cs-stack-label">Deployed on</span>
+            <span>HuggingFace Spaces (Docker)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 OUTCOME -->
+    <section class="cs-section cs-fade">
+      <div class="cs-section-label">09 — Outcome & Reflection</div>
+      <div class="cs-section-content">
+        <h2>What happened, and what was learned</h2>
+        <p>
+          CramRAG is deployed end-to-end at
+          <a href="https://huggingface.co/spaces/AA-Hugger/CramRAG" target="_blank"
+            style="color: var(--accent);">huggingface.co/spaces/AA-Hugger/CramRAG ↗</a>.
+          It covers the full RAG engineering surface: ingestion, chunking strategy, dense +
+          sparse retrieval fusion, cross-encoder reranking, generation, faithfulness evaluation,
+          PDF highlighting, persistent sessions, and Docker deployment — all from scratch.
+        </p>
+        <p>
+          The most important lesson was how much chunking strategy matters relative to
+          more exotic optimisations. A 26-point retrieval improvement from doubling chunk
+          overlap was larger than every algorithmic improvement combined — a reminder that
+          the data representation layer is often where the biggest gains are hiding.
+        </p>
+        <div class="cs-retro">
+          <div class="cs-retro-col">
+            <div class="cs-retro-label">What worked</div>
+            <ul>
+              <li>Source attachment at generation time eliminated the source drift problem entirely —
+                explanations always reflect the chunk that produced the question</li>
+              <li>The retrieval evaluation harness made failure mode diagnosis systematic rather than
+                anecdotal; every improvement was measured before committing</li>
+              <li>Removing escape hatches forced the retrieval pipeline to be genuinely robust rather
+                than quietly degrading on edge cases</li>
+              <li>The split-pane study UI with inline PDF highlighting closes the gap between
+                "the model said X" and "here's exactly where X came from"</li>
+            </ul>
+          </div>
+          <div class="cs-retro-col">
+            <div class="cs-retro-label">What I'd explore next</div>
+            <ul>
+              <li>Terse lecture slides remain the hardest document type — questions sometimes
+                fill gaps with world knowledge even with source-grounding prompts. Structured
+                extraction before chunking might help</li>
+              <li>Near-duplicate question detection across a test set — the generator can produce
+                semantically similar questions from adjacent chunks</li>
+              <li>Adaptive difficulty: tracking per-topic performance across attempts to weight
+                question sampling toward weak areas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- NEXT PROJECT -->
+  <div class="cs-next">
+    <div class="cs-next-label">Next project</div>
+    <a href="project_cybully.html" class="cs-next-link">
+      <span>Cyberbullying Classifier</span>
+      <span class="cs-next-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-left">
+      <span>Azim Said</span>
+      <span class="footer-dim">· Singapore</span>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:azimsaid212@gmail.com">Email</a>
+      <a href="https://github.com/azim-git" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/azimsaid-/" target="_blank">LinkedIn</a>
+    </div>
+    <div class="footer-dim footer-year">© 2026</div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+
+</html>
