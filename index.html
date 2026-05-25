@@ -16,19 +16,7 @@
 <body>
 
   <!-- NAV -->
-  <nav class="nav">
-    <a href="#" class="nav-brand">Azim Said</a>
-    <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#practice">Skills</a></li>
-    </ul>
-    <a href="mailto:azimsaid212@gmail.com" class="nav-contact">Get in touch
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6">
-        <path d="M5 12h14M13 6l6 6-6 6"/>
-      </svg>
-    </a>
-  </nav>
+  <div id="site-nav"></div>
 
   <!-- HERO -->
   <section class="hero">
@@ -67,7 +55,7 @@
         <path d="M -100,420 C 350,360 720,510 1100,440 C 1300,400 1500,430 1600,420 L 1600,520 C 1500,505 1300,560 1100,540 C 720,580 350,460 -100,520 Z"
               fill="url(#r-sage)" opacity="0.75"/>
         <path d="M -100,480 C 400,440 700,520 1100,490 C 1300,475 1500,490 1600,485"
-              stroke="var(--r4)" stroke-width="2.5" fill="none" opacity="0.55"/>
+              stroke="var(--bg)" stroke-width="2.5" fill="none" opacity="0.55"/>
         <path d="M -100,640 C 350,580 760,720 1100,640 C 1300,600 1500,640 1600,620 L 1600,720 L -100,720 Z"
               fill="url(#r-rose)" opacity="0.85"/>
       </svg>
@@ -195,13 +183,6 @@
   <!-- Project 02 — Cybully -->
   <section class="project reverse">
     <div class="project-inner">
-      <div class="project-visual">
-        <img src="images/cybully_main.png" alt="Cyberbullying Classifier" />
-        <svg class="vribbon" viewBox="0 0 600 450" preserveAspectRatio="none">
-          <path d="M -20,60 C 200,120 380,20 620,80 L 620,-20 L -20,-20 Z" fill="var(--r2)" opacity="0.45"/>
-          <path d="M -20,400 C 180,360 380,440 620,390 L 620,460 L -20,460 Z" fill="var(--r5)" opacity="0.5"/>
-        </svg>
-      </div>
       <div class="project-info">
         <div class="project-index">Project No.02</div>
         <h3>Cyberbullying Classifier <em>— NLP</em></h3>
@@ -222,6 +203,13 @@
           <a href="https://huggingface.co/spaces/AA-Hugger/cybully-classifier" class="project-link-ghost" target="_blank">Live Site ↗</a>
           <a href="https://github.com/azim-git/Cybully/tree/master" class="project-link-ghost" target="_blank">GitHub ↗</a>
         </div>
+      </div>
+      <div class="project-visual">
+        <img src="images/cybully_main.png" alt="Cyberbullying Classifier" />
+        <svg class="vribbon" viewBox="0 0 600 450" preserveAspectRatio="none">
+          <path d="M -20,60 C 200,120 380,20 620,80 L 620,-20 L -20,-20 Z" fill="var(--r2)" opacity="0.45"/>
+          <path d="M -20,400 C 180,360 380,440 620,390 L 620,460 L -20,460 Z" fill="var(--r5)" opacity="0.5"/>
+        </svg>
       </div>
     </div>
   </section>
@@ -276,13 +264,6 @@
   <!-- Project 04 — Churp -->
   <section class="project reverse">
     <div class="project-inner">
-      <div class="project-visual">
-        <img src="images/churp_home.png" alt="Churp" />
-        <svg class="vribbon" viewBox="0 0 600 450" preserveAspectRatio="none">
-          <path d="M -20,60 C 200,120 380,20 620,80 L 620,-20 L -20,-20 Z" fill="var(--r5)" opacity="0.5"/>
-          <path d="M -20,400 C 180,360 380,440 620,390 L 620,460 L -20,460 Z" fill="var(--r2)" opacity="0.45"/>
-        </svg>
-      </div>
       <div class="project-info">
         <div class="project-index">Project No.04</div>
         <h3>Churp <em>— web graphics</em></h3>
@@ -300,15 +281,22 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
+      <div class="project-visual">
+        <img src="images/churp_home.png" alt="Churp" />
+        <svg class="vribbon" viewBox="0 0 600 450" preserveAspectRatio="none">
+          <path d="M -20,60 C 200,120 380,20 620,80 L 620,-20 L -20,-20 Z" fill="var(--r5)" opacity="0.5"/>
+          <path d="M -20,400 C 180,360 380,440 620,390 L 620,460 L -20,460 Z" fill="var(--r2)" opacity="0.45"/>
+        </svg>
+      </div>
     </div>
   </section>
 
   <!-- SKILLS -->
-  <section class="practice" id="practice">
-    <div class="practice-inner">
+  <section class="skills" id="skills">
+    <div class="skills-inner">
       <h2>Developer by training, <em>designer</em> by instinct — assembled from craft and engineering.</h2>
-      <div class="practice-grid">
-        <div class="practice-col">
+      <div class="skills-grid">
+        <div class="skills-col">
           <h4>Design</h4>
           <ul>
             <li>UI / Interaction Design</li>
@@ -317,7 +305,7 @@
             <li>Prototypes & Wireframes</li>
           </ul>
         </div>
-        <div class="practice-col">
+        <div class="skills-col">
           <h4>Development</h4>
           <ul>
             <li>React / Next.js / Flask / Express</li>
@@ -326,7 +314,7 @@
             <li>PostgreSQL / MySQL</li>
           </ul>
         </div>
-        <div class="practice-col">
+        <div class="skills-col">
           <h4>AI / ML</h4>
           <ul>
             <li>NLP & Text Classification</li>
@@ -335,7 +323,7 @@
             <li>Evaluation Harnesses</li>
           </ul>
         </div>
-        <div class="practice-col">
+        <div class="skills-col">
           <h4>Currently</h4>
           <ul>
             <li>Open to internships</li>
@@ -349,53 +337,9 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-ribbons" aria-hidden="true">
-      <svg viewBox="0 0 1440 560" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="fr-clay" x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0%" stop-color="var(--r1)" stop-opacity="0"/>
-            <stop offset="20%" stop-color="var(--r1)" stop-opacity="0.95"/>
-            <stop offset="80%" stop-color="var(--r1)" stop-opacity="0.95"/>
-            <stop offset="100%" stop-color="var(--r1)" stop-opacity="0"/>
-          </linearGradient>
-          <linearGradient id="fr-butter" x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0%" stop-color="var(--r3)" stop-opacity="0"/>
-            <stop offset="20%" stop-color="var(--r3)" stop-opacity="0.9"/>
-            <stop offset="80%" stop-color="var(--r3)" stop-opacity="0.9"/>
-            <stop offset="100%" stop-color="var(--r3)" stop-opacity="0"/>
-          </linearGradient>
-          <linearGradient id="fr-rose" x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0%" stop-color="var(--r5)" stop-opacity="0"/>
-            <stop offset="20%" stop-color="var(--r5)" stop-opacity="0.9"/>
-            <stop offset="80%" stop-color="var(--r5)" stop-opacity="0.9"/>
-            <stop offset="100%" stop-color="var(--r5)" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <path d="M -100,80 C 350,20 760,160 1100,80 C 1300,40 1500,80 1600,60 L 1600,160 C 1500,150 1300,200 1100,180 C 760,220 350,100 -100,160 Z"
-              fill="url(#fr-clay)" opacity="0.55"/>
-        <path d="M -100,200 C 350,140 760,280 1100,200"
-              stroke="var(--r4)" stroke-width="2" fill="none" opacity="0.45"/>
-        <path d="M -100,340 C 350,280 760,420 1100,340 C 1300,300 1500,330 1600,320 L 1600,420 C 1500,410 1300,450 1100,430 C 760,470 350,360 -100,420 Z"
-              fill="url(#fr-butter)" opacity="0.55"/>
-        <path d="M -100,500 C 350,440 760,580 1100,500 C 1300,460 1500,490 1600,480 L 1600,580 L -100,580 Z"
-              fill="url(#fr-rose)" opacity="0.65"/>
-      </svg>
-    </div>
-    <div class="footer-inner">
-      <h2>Let's build<br/><em>something great,</em><br/>together.</h2>
-      <a href="mailto:azimsaid212@gmail.com" class="footer-email">azimsaid212@gmail.com</a>
-      <div class="footer-bottom">
-        <div>&copy; Azim Said · Singapore · 2026</div>
-        <div class="footer-socials">
-          <a href="https://github.com/azim-git" target="_blank">GitHub</a>
-          <a href="https://www.linkedin.com/in/azimsaid-/" target="_blank">LinkedIn</a>
-          <a href="mailto:azimsaid212@gmail.com">Email</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <div id="site-footer"></div>
 
+  <script src="js/components.js"></script>
   <script src="js/main.js"></script>
 </body>
 

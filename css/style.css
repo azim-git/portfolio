@@ -495,19 +495,19 @@ a { color: inherit; text-decoration: none; }
   height: 100%;
 }
 
-/* ---- PRACTICE / SKILLS ---- */
-.practice {
+/* ---- SKILLS ---- */
+.skills {
   position: relative;
   padding: 120px 0 80px;
 }
 
-.practice-inner {
+.skills-inner {
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 0 56px;
 }
 
-.practice h2 {
+.skills h2 {
   font-family: var(--display);
   font-weight: 400;
   font-size: clamp(36px, 4.5vw, 56px);
@@ -516,9 +516,9 @@ a { color: inherit; text-decoration: none; }
   max-width: 800px;
   line-height: 1.05;
 }
-.practice h2 em { font-style: italic; color: var(--ink-soft); }
+.skills h2 em { font-style: italic; color: var(--ink-soft); }
 
-.practice-grid {
+.skills-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 40px;
@@ -526,7 +526,7 @@ a { color: inherit; text-decoration: none; }
   padding-top: 40px;
 }
 
-.practice-col h4 {
+.skills-col h4 {
   font-family: var(--display);
   font-style: italic;
   font-weight: 400;
@@ -535,14 +535,14 @@ a { color: inherit; text-decoration: none; }
   color: var(--ink);
 }
 
-.practice-col ul {
+.skills-col ul {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.practice-col li {
+.skills-col li {
   font-size: 14px;
   color: var(--ink-soft);
   line-height: 1.5;
@@ -644,7 +644,7 @@ a { color: inherit; text-decoration: none; }
   .about-inner,
   .project-inner,
   .project.reverse .project-inner,
-  .practice-grid {
+  .skills-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
@@ -657,6 +657,15 @@ a { color: inherit; text-decoration: none; }
 
   .nav-links { display: none; }
 
+  .hero-portrait {
+    max-width: 280px;
+    justify-self: center;
+  }
+
+  .hero-grid {
+    padding-top: 60px;
+  }
+
   .project.reverse .project-info { order: 0; }
 
   .nav,
@@ -664,7 +673,7 @@ a { color: inherit; text-decoration: none; }
   .about-inner,
   .project-inner,
   .project.reverse .project-inner,
-  .practice-inner,
+  .skills-inner,
   .footer-inner,
   .projects-header {
     padding-left: 24px;
