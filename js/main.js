@@ -24,7 +24,7 @@ const sectionObserver = new IntersectionObserver(
       if (entry.isIntersecting) {
         navLinks.forEach((link) => {
           link.style.color = link.getAttribute('href') === `#${entry.target.id}`
-            ? 'var(--text)'
+            ? 'var(--ink)'
             : '';
         });
       }
@@ -34,3 +34,33 @@ const sectionObserver = new IntersectionObserver(
 );
 
 sections.forEach((s) => sectionObserver.observe(s));
+
+// Respect prefers-reduced-motion
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.portrait-orbit').forEach((el) => {
+    el.style.animationPlayState = 'paused';
+  });
+}
+
+// Lightbox
+const lightbox = document.createElement('div');
+lightbox.classList.add('lightbox');
+const lbImg = document.createElement('img');
+lightbox.appendChild(lbImg);
+document.body.appendChild(lightbox);
+
+document.querySelectorAll(
+  '.project-visual img, .cs-cover-img, .cs-img-full img, .cs-img-grid img, .cs-annotated-img'
+).forEach((img) => {
+  img.addEventListener('click', () => {
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+    lightbox.classList.add('active');
+  });
+});
+
+lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') lightbox.classList.remove('active');
+});

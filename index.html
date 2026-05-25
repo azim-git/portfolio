@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
 </head>
 
@@ -17,256 +17,331 @@
 
   <!-- NAV -->
   <nav class="nav">
-    <span class="nav-logo">AZIM SAID<span class="dot">.</span></span>
-    <div class="nav-links">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="mailto:you@email.com">Contact</a>
-    </div>
+    <a href="#" class="nav-brand">Azim Said</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#practice">Skills</a></li>
+    </ul>
+    <a href="mailto:azimsaid212@gmail.com" class="nav-contact">Get in touch
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M5 12h14M13 6l6 6-6 6"/>
+      </svg>
+    </a>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-eyebrow">Full-Stack Development & Design</div>
-    <h1 class="hero-title">
-      I design things<br />
-      <em>and build them.</em>
-    </h1>
-    <p class="hero-sub">
-      Based in Singapore. I design appealing interfaces, engineer seamless workflows, and craft meaningful experiences.
-    </p>
-    <a href="#work" class="hero-cta">See my work ↓</a>
-    <div class="hero-tag">Available for internships · 2026</div>
+    <div class="hero-ribbons" aria-hidden="true">
+      <svg viewBox="0 0 1440 720" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="r-clay" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="var(--r1)" stop-opacity="0.0"/>
+            <stop offset="20%" stop-color="var(--r1)" stop-opacity="0.95"/>
+            <stop offset="80%" stop-color="var(--r1)" stop-opacity="0.95"/>
+            <stop offset="100%" stop-color="var(--r1)" stop-opacity="0.0"/>
+          </linearGradient>
+          <linearGradient id="r-sage" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="var(--r2)" stop-opacity="0.0"/>
+            <stop offset="15%" stop-color="var(--r2)" stop-opacity="0.85"/>
+            <stop offset="85%" stop-color="var(--r2)" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="var(--r2)" stop-opacity="0.0"/>
+          </linearGradient>
+          <linearGradient id="r-butter" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="var(--r3)" stop-opacity="0.0"/>
+            <stop offset="20%" stop-color="var(--r3)" stop-opacity="0.9"/>
+            <stop offset="80%" stop-color="var(--r3)" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="var(--r3)" stop-opacity="0.0"/>
+          </linearGradient>
+          <linearGradient id="r-rose" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="var(--r5)" stop-opacity="0.0"/>
+            <stop offset="20%" stop-color="var(--r5)" stop-opacity="0.9"/>
+            <stop offset="80%" stop-color="var(--r5)" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="var(--r5)" stop-opacity="0.0"/>
+          </linearGradient>
+        </defs>
+        <path d="M -100,140 C 300,30 700,200 1100,90 C 1300,40 1500,80 1600,60 L 1600,-40 L -100,-40 Z"
+              fill="url(#r-clay)"/>
+        <path d="M -100,180 C 300,80 700,240 1100,140 C 1300,90 1500,130 1600,110 L 1600,0 L -100,0 Z"
+              fill="url(#r-butter)" opacity="0.7"/>
+        <path d="M -100,420 C 350,360 720,510 1100,440 C 1300,400 1500,430 1600,420 L 1600,520 C 1500,505 1300,560 1100,540 C 720,580 350,460 -100,520 Z"
+              fill="url(#r-sage)" opacity="0.75"/>
+        <path d="M -100,480 C 400,440 700,520 1100,490 C 1300,475 1500,490 1600,485"
+              stroke="var(--r4)" stroke-width="2.5" fill="none" opacity="0.55"/>
+        <path d="M -100,640 C 350,580 760,720 1100,640 C 1300,600 1500,640 1600,620 L 1600,720 L -100,720 Z"
+              fill="url(#r-rose)" opacity="0.85"/>
+      </svg>
+    </div>
+
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="eyebrow"><span class="dot"></span> Full-Stack & Design · 2026</div>
+        <h1>Azim Said<br/><span class="accent">design & build</span></h1>
+        <p class="lede">Based in Singapore. I design appealing interfaces, engineer seamless workflows, and craft meaningful experiences.</p>
+        <div class="meta">
+          <div>Based in<span>Singapore</span></div>
+          <div>Available<span>May 2026 onwards</span></div>
+          <div>Studying<span>Applied AI, SIT</span></div>
+        </div>
+      </div>
+
+      <div class="hero-portrait">
+        <svg class="ring-label" viewBox="0 0 460 460" aria-hidden="true">
+          <defs>
+            <path id="ring-path" d="M 230,230 m -218,0 a 218,218 0 1,1 436,0 a 218,218 0 1,1 -436,0"/>
+          </defs>
+          <text font-family="Geist, sans-serif" font-size="11" letter-spacing="6" fill="var(--ink-soft)">
+            <textPath href="#ring-path" startOffset="0">
+              OPEN TO INTERNSHIPS · DESIGN · FULL-STACK · AI · OPEN TO INTERNSHIPS · DESIGN · FULL-STACK · AI ·&nbsp;
+            </textPath>
+          </text>
+        </svg>
+        <div class="ring"></div>
+        <div class="photo">
+          <img src="images/portrait.png" alt="Azim Said" />
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- WORK -->
-  <section class="work" id="work">
-    <div class="section-label">Selected Work</div>
-
-    <!-- Project 1 -->
-    <article class="project" data-index="01">
-      <div class="project-meta">
-        <span class="project-number">01</span>
-        <div class="project-tags">
-          <span class="tag">Web Graphics</span>
-          <span class="tag">UI Design</span>
-        </div>
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="about-label">About</div>
+      <p class="about-quote">"Developer by training, designer by instinct — building at the intersection of visual craft and engineering pragmatism."</p>
+      <div class="about-body">
+        <p>I'm a Year 2 student at Singapore Institute of Technology, studying Applied Artificial Intelligence. I build full-stack web applications and care deeply about how they feel to use — not just how they work.</p>
+        <p>My design work lives at the intersection of visual craft and engineering pragmatism. I think about systems, constraints, and edge cases while designing — which means fewer surprises when it's time to build.</p>
       </div>
-      <div class="project-content">
-        <div class="project-image">
-          <img src="images/churp_home.png" alt="Churp Homepage" />
-        </div>
-        <div class="project-info">
-          <h2 class="project-title">Churp</h2>
-          <p class="project-problem">
-            <strong>Problem:</strong> Informal, inconsistent processing of paperwork by community managers, and lack of
-            formal support structure for resident gardeners.
-            We aimed to digitise the management of community gardens to connect Tengah residents and community managers.
-          </p>
-          <p class="project-process">
-            <strong>Process:</strong> Industry research was done on existing government websites to mimic their familiar
-            style.
-            This allowed me to surmise my approach into two keywords: "inclusive" and "welcoming". The graphics were
-            first drafted in Adobe Photoshop, then translated into SVG web assets in Figma.
-            Finally, they were optimised and minified to maintain a small size.
+    </div>
+  </section>
 
-            Throughout the process, feedback was gathered from the developer side to iterate upon with. The final
-            designs ensured all the developers were satisfied.
-          </p>
-          <p class="project-outcome">
-            <strong>Outcome:</strong> 13 fully polished, minified SVGs ranging from large web assets, to icons, to
-            sample user portraits.
+  <!-- DIVIDER RIBBON -->
+  <div class="divider-ribbon" aria-hidden="true">
+    <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="dr-clay" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0%" stop-color="var(--r1)" stop-opacity="0"/>
+          <stop offset="20%" stop-color="var(--r1)" stop-opacity="0.95"/>
+          <stop offset="80%" stop-color="var(--r1)" stop-opacity="0.95"/>
+          <stop offset="100%" stop-color="var(--r1)" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="dr-butter" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0%" stop-color="var(--r3)" stop-opacity="0"/>
+          <stop offset="20%" stop-color="var(--r3)" stop-opacity="0.9"/>
+          <stop offset="80%" stop-color="var(--r3)" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="var(--r3)" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <path d="M -50,110 C 350,40 720,180 1100,110 C 1280,80 1400,100 1500,90 L 1500,170 C 1400,180 1280,160 1100,180 C 720,220 350,80 -50,180 Z"
+            fill="url(#dr-clay)" opacity="0.6"/>
+      <path d="M -50,130 C 350,70 760,200 1100,140 C 1280,115 1400,130 1500,125"
+            stroke="var(--r4)" stroke-width="2" fill="none" opacity="0.5"/>
+      <path d="M -50,160 C 350,110 720,220 1100,170 C 1280,145 1400,165 1500,160 L 1500,220 L -50,220 Z"
+            fill="url(#dr-butter)" opacity="0.55"/>
+    </svg>
+  </div>
 
-          </p>
-          <div class="project-links">
-            <a href="work/project_churp.html" class="link-btn">View Case Study →</a>
-            <!-- <a href="#" class="link-btn link-ghost">Live Site ↗</a> -->
-          </div>
-        </div>
-      </div>
-    </article>
+  <!-- PROJECTS HEADER -->
+  <div class="projects-header" id="work">
+    <h2>Selected <em>work</em></h2>
+    <div class="projects-count">2024 — 2026 · Four projects</div>
+  </div>
 
-    <!-- Project 2 -->
-    <article class="project" data-index="02">
-      <div class="project-meta">
-        <span class="project-number">02</span>
-        <div class="project-tags">
-          <span class="tag">Full-Stack</span>
-          <span class="tag">Systems Design</span>
-        </div>
-      </div>
-      <div class="project-content project-content--reverse">
-        <div class="project-image">
-          <img src="images/brice_home.png" alt="Brice DataHub Homepage" />
-        </div>
-        <div class="project-info">
-          <h2 class="project-title">Brice DataHub</h2>
-          <p class="project-problem">
-            <strong>Problem:</strong> The BRICE battery circular economy programme at A*STAR generates large volumes of
-            battery research data with no unified platform to manage it. Data was fragmented across ad hoc locations,
-            had no consistent metadata and no access control. Researchers couldn't search, compare, or govern their data
-            effectively.
-          </p>
-          <p class="project-process">
-            <strong>Process:</strong> Designed and built a purpose-built internal data platform
-            on ABP Framework (ASP.NET Core) with a PostgreSQL backend.
-            Direct feedback from biweekly meetings with industry mentors helped shape the end product to better fit
-            requirements.
-
-          </p>
-          <p class="project-outcome">
-            <strong>Outcome:</strong> A working platform with a functional Explore page,
-            multi-file upload functionality, scoped row-level Records view, soft
-            deletion, zip-based multi-file download, and role-aware UI.
-          </p>
-          <div class="project-links">
-            <a href="work/project_brice.html" class="link-btn">View Case Study →</a>
-            <!-- <a href="#" class="link-btn link-ghost">GitHub ↗</a> -->
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- Project 3 -->
-    <article class="project" data-index="03">
-      <div class="project-meta">
-        <span class="project-number">03</span>
-        <div class="project-tags">
-          <span class="tag">NLP / ML</span>
-          <span class="tag">Full-Stack</span>
-        </div>
-      </div>
-      <div class="project-content">
-        <div class="project-image">
-          <img src="images/cybully_main.png" alt="Cyberbullying Classifier Homepage" />
-        </div>
-        <div class="project-info">
-          <h2 class="project-title">Cyberbullying Classifier</h2>
-          <p class="project-problem">
-            <strong>Problem:</strong> Content moderation tools treat harm as binary. <em>Is it harmful or is it
-              safe?</em>
-            This misses the spectrum between offensive language and targeted hate speech, and gives
-            users no signal about <em>why</em> content is flagged.
-          </p>
-          <p class="project-process">
-            <strong>Process:</strong> Fine-tuned DistilBERT on the HateXplain dataset (20,148 posts)
-            for three-class classification. EDA revealed a 51% annotator disagreement rate —
-            an irreducible noise floor that set realistic expectations for the model ceiling.
-            Output strategy: full softmax confidence scores per class rather than hard labels,
-            enabling graduated intervention based on certainty.
-          </p>
-          <p class="project-outcome">
-            <strong>Outcome:</strong> 69.6% accuracy, macro F1 0.69. Post-training analysis on 919
-            held-out ambiguous posts found the model systematically less confident on posts humans
-            also disagreed on — a useful property for routing borderline cases to human review.
-            Deployed via FastAPI + React on HuggingFace Spaces.
-          </p>
-          <div class="project-links">
-            <a href="work/project_cybully.html" class="link-btn">View Case Study →</a>
-            <a href="https://huggingface.co/spaces/AA-Hugger/cybully-classifier" class="link-btn link-ghost">Live Site
-              ↗</a>
-            <a href="https://github.com/azim-git/Cybully/tree/master" class="link-btn link-ghost">GitHub ↗</a>
-          </div>
-        </div>
-      </div>
-      </div>
-    </article>
-
-    <!-- Project N — CramRAG -->
-    <article class="project" data-index="04">
-      <div class="project-meta">
-        <span class="project-number">04</span>
+  <!-- Project 01 — CramRAG -->
+  <section class="project">
+    <div class="project-inner">
+      <div class="project-info">
+        <div class="project-index">Project No.01</div>
+        <h3>CramRAG <em>— study tool</em></h3>
         <div class="project-tags">
           <span class="tag">NLP / ML</span>
           <span class="tag">RAG</span>
           <span class="tag">Full-Stack</span>
         </div>
-      </div>
-      <div class="project-content">
-        <div class="project-image">
-          <img src="images/cramrag_home.png" alt="CramRAG home screen" />
+        <p>A RAG-powered study app that turns uploaded PDFs into graded quizzes and a citation-aware study chat. Custom retrieval pipeline with formal evaluation harness, deployed on HuggingFace Spaces.</p>
+        <div class="project-meta-row">
+          <div>Role<span>ML Engineer & Developer</span></div>
+          <div>Year<span>2026</span></div>
         </div>
-        <div class="project-info">
-          <h2 class="project-title">CramRAG</h2>
-          <p class="project-problem">
-            <strong>Problem:</strong> Generic AI study tools have a faithfulness problem — LLMs fill
-            gaps in lecture slides with world knowledge, producing explanations that sound plausible
-            but contradict the source material students are being assessed on. Existing tools also
-            only generate flat fact-recall questions, ignoring synthesis and multi-answer formats.
-          </p>
-          <p class="project-process">
-            <strong>Process:</strong> Built a full RAG pipeline from scratch: ChromaDB vector store,
-            BM25 + cross-encoder reranking, query decomposition, and HyDE. A formal retrieval
-            evaluation harness (50 ground-truth pairs, Hit@K / MRR@K) diagnosed chunk boundary as
-            the dominant failure mode — doubling overlap from 240 to 480 characters improved Hit@5
-            by 26.6pp, larger than all algorithmic improvements combined. End-to-end quality was
-            measured with a 30-pair RAGAS harness (Faithfulness 0.88, Answer Relevancy 0.90).
-          </p>
-          <p class="project-outcome">
-            <strong>Outcome:</strong> A deployed study app with four question types, a split-pane
-            study chat with inline PDF highlighting of cited passages, persistent sessions and quiz
-            history, and a two-stage Docker build that switches LLM and embedding model between local
-            and prod via environment variables. Deployed on HuggingFace Spaces.
-          </p>
-          <div class="project-links">
-            <a href="work/project_cramrag.html" class="link-btn">View Case Study →</a>
-            <a href="https://huggingface.co/spaces/AA-Hugger/CramRAG" class="link-btn link-ghost" target="_blank">Live
-              Site ↗</a>
-            <a href="https://github.com/azim-git/CramRAG" class="link-btn link-ghost" target="_blank">GitHub ↗</a>
-          </div>
+        <div class="project-links">
+          <a href="work/project_cramrag.html" class="project-cta">
+            View case study
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="https://huggingface.co/spaces/AA-Hugger/CramRAG" class="project-link-ghost" target="_blank">Live Site ↗</a>
+          <a href="https://github.com/azim-git/CramRAG" class="project-link-ghost" target="_blank">GitHub ↗</a>
         </div>
       </div>
-    </article>
-
-
+      <div class="project-visual">
+        <img src="images/cramrag_home.png" alt="CramRAG home screen" />
+        <svg class="vribbon" viewBox="0 0 600 450" preserveAspectRatio="none">
+          <path d="M -20,380 C 150,320 360,420 620,360 L 620,460 L -20,460 Z" fill="var(--r1)" opacity="0.5"/>
+          <path d="M -20,40 C 200,90 380,10 620,60 L 620,-20 L -20,-20 Z" fill="var(--r3)" opacity="0.45"/>
+        </svg>
+      </div>
+    </div>
   </section>
 
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="section-label">About</div>
-    <div class="about-grid">
-      <div class="about-text">
-        <h2>Developer by training,<br /><em>designer by instinct.</em></h2>
-        <p>
-          I'm a Year 2 student at Singapore Institute of Technology, studying Applied Artificial Intelligence. I build
-          full-stack
-          web applications and care deeply about how they feel to use — not just how
-          they work.
-        </p>
-        <p>
-          My design work lives at the intersection of visual craft and engineering
-          pragmatism. I think about systems, constraints, and edge cases while
-          designing — which means fewer surprises when it's time to build.
-        </p>
-        <p>
-          Outside of uni work: I build personal tools and do digital art.
-        </p>
+  <div class="between" aria-hidden="true">
+    <svg viewBox="0 0 1440 160" preserveAspectRatio="none">
+      <path d="M -50,80 C 350,30 760,140 1100,70 C 1280,40 1400,60 1500,55"
+            stroke="var(--r2)" stroke-width="3" fill="none" opacity="0.5"/>
+      <path d="M -50,100 C 350,55 760,160 1100,90 C 1280,65 1400,85 1500,80 L 1500,160 L -50,160 Z"
+            fill="var(--r5)" opacity="0.45"/>
+    </svg>
+  </div>
+
+  <!-- Project 02 — Cybully -->
+  <section class="project reverse">
+    <div class="project-inner">
+      <div class="project-visual">
+        <img src="images/cybully_main.png" alt="Cyberbullying Classifier" />
+        <svg class="vribbon" viewBox="0 0 600 450" preserveAspectRatio="none">
+          <path d="M -20,60 C 200,120 380,20 620,80 L 620,-20 L -20,-20 Z" fill="var(--r2)" opacity="0.45"/>
+          <path d="M -20,400 C 180,360 380,440 620,390 L 620,460 L -20,460 Z" fill="var(--r5)" opacity="0.5"/>
+        </svg>
       </div>
-      <div class="about-skills">
-        <div class="skills-group">
-          <div class="skills-label">Design</div>
+      <div class="project-info">
+        <div class="project-index">Project No.02</div>
+        <h3>Cyberbullying Classifier <em>— NLP</em></h3>
+        <div class="project-tags">
+          <span class="tag">NLP / ML</span>
+          <span class="tag">Full-Stack</span>
+        </div>
+        <p>A fine-tuned DistilBERT model classifying social media posts as normal, offensive, or hate speech with full softmax confidence scores. Deployed via FastAPI + React on HuggingFace Spaces.</p>
+        <div class="project-meta-row">
+          <div>Role<span>ML Engineer & Developer</span></div>
+          <div>Year<span>2026</span></div>
+        </div>
+        <div class="project-links">
+          <a href="work/project_cybully.html" class="project-cta">
+            View case study
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="https://huggingface.co/spaces/AA-Hugger/cybully-classifier" class="project-link-ghost" target="_blank">Live Site ↗</a>
+          <a href="https://github.com/azim-git/Cybully/tree/master" class="project-link-ghost" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="between" aria-hidden="true">
+    <svg viewBox="0 0 1440 160" preserveAspectRatio="none">
+      <path d="M -50,90 C 350,40 760,150 1100,80 C 1280,50 1400,70 1500,65 L 1500,160 L -50,160 Z"
+            fill="var(--r3)" opacity="0.55"/>
+      <path d="M -50,70 C 350,20 760,130 1100,60"
+            stroke="var(--r1)" stroke-width="2" fill="none" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Project 03 — BRICE -->
+  <section class="project">
+    <div class="project-inner">
+      <div class="project-info">
+        <div class="project-index">Project No.03</div>
+        <h3>BRICE DataHub <em>— platform</em></h3>
+        <div class="project-tags">
+          <span class="tag">Full-Stack</span>
+          <span class="tag">Systems Design</span>
+        </div>
+        <p>A purpose-built internal data platform for A*STAR's battery remanufacturing programme. Filterable DataTable, multi-file upload with enforced metadata, and role-aware access control.</p>
+        <div class="project-meta-row">
+          <div>Role<span>Developer</span></div>
+          <div>Year<span>2025 — 2026</span></div>
+        </div>
+        <a href="work/project_brice.html" class="project-cta">
+          View case study
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="project-visual">
+        <img src="images/brice_home.png" alt="BRICE DataHub" />
+        <svg class="vribbon" viewBox="0 0 600 450" preserveAspectRatio="none">
+          <path d="M -20,380 C 150,330 360,420 620,360 L 620,460 L -20,460 Z" fill="var(--r4)" opacity="0.4"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="between" aria-hidden="true">
+    <svg viewBox="0 0 1440 160" preserveAspectRatio="none">
+      <path d="M -50,80 C 350,30 760,140 1100,70 C 1280,40 1400,60 1500,55"
+            stroke="var(--r4)" stroke-width="2" fill="none" opacity="0.45"/>
+      <path d="M -50,100 C 350,55 760,160 1100,90 C 1280,65 1400,85 1500,80 L 1500,160 L -50,160 Z"
+            fill="var(--r1)" opacity="0.4"/>
+    </svg>
+  </div>
+
+  <!-- Project 04 — Churp -->
+  <section class="project reverse">
+    <div class="project-inner">
+      <div class="project-visual">
+        <img src="images/churp_home.png" alt="Churp" />
+        <svg class="vribbon" viewBox="0 0 600 450" preserveAspectRatio="none">
+          <path d="M -20,60 C 200,120 380,20 620,80 L 620,-20 L -20,-20 Z" fill="var(--r5)" opacity="0.5"/>
+          <path d="M -20,400 C 180,360 380,440 620,390 L 620,460 L -20,460 Z" fill="var(--r2)" opacity="0.45"/>
+        </svg>
+      </div>
+      <div class="project-info">
+        <div class="project-index">Project No.04</div>
+        <h3>Churp <em>— web graphics</em></h3>
+        <div class="project-tags">
+          <span class="tag">Web Graphics</span>
+          <span class="tag">UI Design</span>
+        </div>
+        <p>13 fully polished, minified SVGs for a community garden management app — from large web assets to icons to sample user portraits. Designed in Photoshop, translated to Figma, optimised for web.</p>
+        <div class="project-meta-row">
+          <div>Role<span>Designer</span></div>
+          <div>Year<span>2025 — 2026</span></div>
+        </div>
+        <a href="work/project_churp.html" class="project-cta">
+          View case study
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="practice" id="practice">
+    <div class="practice-inner">
+      <h2>Developer by training, <em>designer</em> by instinct — assembled from craft and engineering.</h2>
+      <div class="practice-grid">
+        <div class="practice-col">
+          <h4>Design</h4>
           <ul>
             <li>UI / Interaction Design</li>
             <li>Figma, Photoshop</li>
             <li>Web Graphics & Illustration</li>
-            <li>Prototypes, Storyboards, Wireframes</li>
+            <li>Prototypes & Wireframes</li>
           </ul>
         </div>
-        <div class="skills-group">
-          <div class="skills-label">Development</div>
+        <div class="practice-col">
+          <h4>Development</h4>
           <ul>
-            <li>React / Next.js / Flask / Express / Nodejs / Ionic</li>
-            <li>TypeScript, Python, C#, JS, Java, SQL, PHP</li>
-            <li>Node.js</li>
+            <li>React / Next.js / Flask / Express</li>
+            <li>TypeScript, Python, C#, Java</li>
+            <li>Node.js / Ionic</li>
             <li>PostgreSQL / MySQL</li>
           </ul>
         </div>
-        <div class="skills-group">
-          <div class="skills-label">Currently</div>
+        <div class="practice-col">
+          <h4>AI / ML</h4>
           <ul>
-            <li>Open to design, software development, and AI internships</li>
+            <li>NLP & Text Classification</li>
+            <li>RAG Pipelines</li>
+            <li>HuggingFace, PyTorch</li>
+            <li>Evaluation Harnesses</li>
+          </ul>
+        </div>
+        <div class="practice-col">
+          <h4>Currently</h4>
+          <ul>
+            <li>Open to internships</li>
             <li>Based in Singapore</li>
-            <li>Available: 4 May 2026 onwards</li>
+            <li>Available May 2026 onwards</li>
+            <li>Applied AI, SIT (Year 2)</li>
           </ul>
         </div>
       </div>
@@ -275,16 +350,50 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-left">
-      <span>Azim Said</span>
-      <span class="footer-dim">· Singapore</span>
+    <div class="footer-ribbons" aria-hidden="true">
+      <svg viewBox="0 0 1440 560" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="fr-clay" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="var(--r1)" stop-opacity="0"/>
+            <stop offset="20%" stop-color="var(--r1)" stop-opacity="0.95"/>
+            <stop offset="80%" stop-color="var(--r1)" stop-opacity="0.95"/>
+            <stop offset="100%" stop-color="var(--r1)" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="fr-butter" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="var(--r3)" stop-opacity="0"/>
+            <stop offset="20%" stop-color="var(--r3)" stop-opacity="0.9"/>
+            <stop offset="80%" stop-color="var(--r3)" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="var(--r3)" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="fr-rose" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="var(--r5)" stop-opacity="0"/>
+            <stop offset="20%" stop-color="var(--r5)" stop-opacity="0.9"/>
+            <stop offset="80%" stop-color="var(--r5)" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="var(--r5)" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="M -100,80 C 350,20 760,160 1100,80 C 1300,40 1500,80 1600,60 L 1600,160 C 1500,150 1300,200 1100,180 C 760,220 350,100 -100,160 Z"
+              fill="url(#fr-clay)" opacity="0.55"/>
+        <path d="M -100,200 C 350,140 760,280 1100,200"
+              stroke="var(--r4)" stroke-width="2" fill="none" opacity="0.45"/>
+        <path d="M -100,340 C 350,280 760,420 1100,340 C 1300,300 1500,330 1600,320 L 1600,420 C 1500,410 1300,450 1100,430 C 760,470 350,360 -100,420 Z"
+              fill="url(#fr-butter)" opacity="0.55"/>
+        <path d="M -100,500 C 350,440 760,580 1100,500 C 1300,460 1500,490 1600,480 L 1600,580 L -100,580 Z"
+              fill="url(#fr-rose)" opacity="0.65"/>
+      </svg>
     </div>
-    <div class="footer-links">
-      <a href="mailto:azimsaid212@gmail.com">Email</a>
-      <a href="https://github.com/azim-git" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/azimsaid-/" target="_blank">LinkedIn</a>
+    <div class="footer-inner">
+      <h2>Let's build<br/><em>something great,</em><br/>together.</h2>
+      <a href="mailto:azimsaid212@gmail.com" class="footer-email">azimsaid212@gmail.com</a>
+      <div class="footer-bottom">
+        <div>&copy; Azim Said · Singapore · 2026</div>
+        <div class="footer-socials">
+          <a href="https://github.com/azim-git" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/azimsaid-/" target="_blank">LinkedIn</a>
+          <a href="mailto:azimsaid212@gmail.com">Email</a>
+        </div>
+      </div>
     </div>
-    <div class="footer-dim footer-year">© 2026</div>
   </footer>
 
   <script src="js/main.js"></script>
